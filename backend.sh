@@ -59,7 +59,10 @@ VALIDATE $? "Downloading backend code"
 cd /app &>>$LOGFILE
 VALIDATE $? "open the app"
 
-unzip /tmp/backend.zip
+rm -rf /app/* &>>$LOGFILE
+VALIDATE $? "remove existing content"
+
+unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extract backend code"
 
 npm install &>>$LOGFILE
