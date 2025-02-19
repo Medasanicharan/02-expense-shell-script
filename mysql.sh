@@ -31,10 +31,6 @@ VALIDATE(){
 
 dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL server"
-if [ $? -eq 0 ]
-    then 
-        echo -e "$i already installed...$Y SKIPING $N"
-    fi
 
 systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Enabling MySQL server"
