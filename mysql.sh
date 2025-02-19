@@ -16,6 +16,7 @@ LOGFILE=/tmp/"$SCRIPT_NAME-$TIMESTAMP".log # LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAM
 
 R="\e[31m"
 G="\e[32m"
+Y="\e[33m"
 N="\e[0m"
 
 VALIDATE(){
@@ -39,4 +40,4 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting MySQL server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "Settingup root password"
+VALIDATE $? "Setting up root password"
