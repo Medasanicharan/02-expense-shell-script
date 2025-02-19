@@ -30,13 +30,13 @@ VALIDATE(){
 }
 
 dnf install nginx -y &>>$LOGFILE
-VALIDATE $? "Installing nginix"
+VALIDATE $? "Installing nginx"
 
 systemctl enable nginx &>>$LOGFILE
-VALIDATE $? "Enabling nginix"
+VALIDATE $? "Enabling nginx"
 
 systemctl start nginx &>>$LOGFILE
-VALIDATE $? "Starting nginix"
+VALIDATE $? "Starting nginx"
 
 rm -rf /usr/share/nginx/html/* &>>$LOGFILE
 VALIDATE $? "Remove existing content"
@@ -54,4 +54,4 @@ cp /home/ec2-user/02-expense-shell-script/expense.conf /etc/nginx/default.d/expe
 VALIDATE $? "Copied frontend service"
 
 systemctl restart nginx &>>$LOGFILE
-VALIDATE $? "Restarting nginix"
+VALIDATE $? "Restarting nginx"
