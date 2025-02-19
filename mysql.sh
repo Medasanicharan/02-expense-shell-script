@@ -44,7 +44,7 @@ VALIDATE $? "Starting MySQL server"
 # below code will be useful for idempotent nature
 
 mysql -h db.daws78s.xyz -uroot -pExpenseApp@1 -e 'SHOW DATABASES;' &>>$LOGFILE
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "Setting up root password"
