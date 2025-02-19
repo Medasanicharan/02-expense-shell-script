@@ -69,17 +69,17 @@ VALIDATE $? "copied backend service"
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "Demon reload"
 
-# systemctl start backend &>>$LOGFILE
-# VALIDATE $? "Starting bacend"
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "Starting bacend"
 
-# systemctl enable backend &>>$LOGFILE
-# VALIDATE $? "Enabling backend"
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "Enabling backend"
 
-# dnf install mysql -y &>>$LOGFILE
-# VALIDATE $? "Installing MySQL"
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MySQL"
 
-# mysql -h db.daws78s.xyz -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
-# VALIDATE $? "Schema loading"
+mysql -h db.daws78s.xyz -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
 
-# systemctl restart backend &>>$LOGFILE
-# VALIDATE $? "Restarting backend"
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting backend"
