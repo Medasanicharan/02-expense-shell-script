@@ -29,6 +29,9 @@ VALIDATE(){
     fi
 }
 
+echo "please enter DB password:"
+read -s mysql_root_password
+
 dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL server"
 
@@ -43,10 +46,10 @@ VALIDATE $? "Starting MySQL server"
 
 # below code will be useful for idempotent nature
 
-mysql -h db.daws78s.xyz -uroot -pExpenseApp@1 -e 'SHOW DATABASES;' &>>$LOGFILE
+mysql -h db.daws78s.xyz -uroot -p${mysql_root_password} -e 'SHOW DATABASES;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1
+    mysql_secure_installation --set-root-pass ${mysql_root_password}
     VALIDATE $? "Setting up root password"
 else
     echo -e "MySQL root password is already setup.. $Y SKIPPING $n"
