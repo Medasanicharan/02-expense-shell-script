@@ -29,6 +29,9 @@ VALIDATE(){
     fi
 }
 
+echo "please enter DB password:"
+read mysql_root_password
+
 dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE $? "Disabling default nodejs"
 
@@ -60,3 +63,23 @@ VALIDATE $? "Extract backend code"
 npm install &>>$LOGFILE
 VALIDATE $? "Intalling nodejs dependencies"
 
+cp /home/ec2-user/02-expense-shell-script /etc/systemd/system/backend.service &>>$LOGFILE
+VALIDATE $? "copied backend service"
+
+systemctl daemon-reload &>>$LOGFILE
+VALIDATE $? "Demon reload"
+
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "Starting bacend"
+
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "Enabling backend"
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MySQL"
+
+mysql -h db.daws78s.xyz -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting backend"
