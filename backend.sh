@@ -74,11 +74,11 @@ VALIDATE $? "copied backend service"
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "Demon reload"
 
-systemctl start backend &>>$LOGFILE
-VALIDATE $? "Starting bacend"
-
 systemctl enable backend &>>$LOGFILE
 VALIDATE $? "Enabling backend"
+
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "Starting bacend"
 
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL"
